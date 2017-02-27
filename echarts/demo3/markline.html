@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>bar-chart</title>
+	<script src="../echarts.min.js"></script>
+</head>
+<body>
+ <div id="main" style="width: 900px;height: 600px">
+ 	
+ </div>
+ <script>
+ 	var bar = document.getElementById('main');
+ 	var myBar = echarts.init(bar);
+
+ 	var option={
+ 		//标题
+ 		title:{
+ 			text:'水果销量图'
+ 		},
+ 		//工具箱
+ 		toolbox:{
+ 			show:true,
+ 			feature:{
+ 				dataView:{
+ 					show:true
+ 				},
+ 				saveAsImage:{
+ 					show:true
+ 				},
+ 				restore:{
+ 					show:true
+ 				},
+ 				dataZoom:{
+ 					show:true
+ 				},
+ 				magicType:{
+ 					type:['line','bar']
+ 				}
+ 			}
+ 		},
+
+ 		//图例
+ 		legend:{
+ 			data:['销量']
+ 		},
+ 		// x轴
+ 		xAxis:{
+ 			data:['苹果','梨子','香蕉','橘子','葡萄']
+ 		},
+ 		// y轴
+ 		yAxis:{
+
+ 		},
+ 		//数据 
+ 		series:[{
+ 			name:'销量',
+ 			type:'bar',
+ 			data:[5,10,20,30,13],
+ 			markPoint:{
+ 				data:[
+ 					{type:'max',name:'最大值'},
+ 					{type:'min',name:'最小值',symbol:'arrow'}
+ 				]
+ 			},
+ 			markLine:{
+ 				data:[
+ 					{type:'average',name:'平均值'}
+ 				]
+ 			}
+ 		}]
+ 	}
+ 	myBar.setOption(option)
+ </script>
+</body>
+</html>

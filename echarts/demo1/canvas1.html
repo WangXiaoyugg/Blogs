@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas画图</title>
+</head>
+<body>
+	<canvas width="100" height="100" style="border:1px solid red;">
+		对不起，您的浏览器不支持canvas
+	</canvas>
+	<script>
+		var canvas = document.querySelector('canvas');
+		var ctx = canvas.getContext('2d')
+		ctx.beginPath()
+		var ball={
+			x:50,
+			y:50,
+			r:30,
+			start:0,
+			end:Math.PI*2,
+			anti:false,
+			color:'blue'
+		}
+		ctx.strokeStyle=ball.color;
+		ctx.arc(ball.x, ball.y, ball.r,ball.start ,ball.end , ball.anti);
+		ctx.stroke();
+	</script>
+</body>
+</html>

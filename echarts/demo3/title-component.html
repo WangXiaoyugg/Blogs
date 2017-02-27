@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>bar-chart</title>
+	<script src="../echarts.min.js"></script>
+</head>
+<body>
+ <div id="main" style="width: 900px;height: 600px">
+ 	
+ </div>
+ <script>
+ 	var bar = document.getElementById('main');
+ 	var myBar = echarts.init(bar);
+
+ 	var option={
+ 		//标题
+ 		title:{
+ 			show:true,
+ 			text:'水果销量图',
+ 			subtext:'一月水果销量图',
+ 			link:'http://www.baidu.com',
+ 			target:'blank',
+ 			textStyle:{
+ 				color:'#666',
+ 				fontStyle:'normal',
+ 				fontWeight:'800',
+ 				fontFamily:'cursive',
+ 				fontSize:30,
+ 			},
+ 			textAlign:'center',
+ 			borderColor:'#ccc',
+ 			backgroundColor:'red',
+ 			padding:20,
+ 			itemGap:5,
+
+ 		},
+ 		//工具箱
+ 		toolbox:{
+ 			show:true,
+ 			feature:{
+ 				saveAsImage:{
+ 					show:true
+ 				}
+ 			}
+ 		},
+
+ 		//图例
+ 		legend:{
+ 			data:['销量']
+ 		},
+ 		// x轴
+ 		xAxis:{
+ 			data:['苹果','梨子','香蕉','橘子','葡萄']
+ 		},
+ 		// y轴
+ 		yAxis:{
+
+ 		},
+ 		//数据 
+ 		series:[{
+ 			name:'销量',
+ 			type:'bar',
+ 			data:[5,10,20,30,13]
+ 		}]
+ 	}
+ 	myBar.setOption(option)
+ </script>
+</body>
+</html>

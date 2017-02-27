@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>step1</title>
+	<link rel="stylesheet" type="text/css" href="../bootstrap.css">
+	<style type="text/css">
+	body{margin: 0;padding:0;}
+	h1{padding-bottom: 10px;}
+	.container{padding-top: 50px;}
+	#search-btn{margin-top: 20px;}
+	</style>
+</head>
+<body>
+	<div class="container">
+	     <h1>2017安徽我要去的地方</h1>
+		<div class="row">
+			<div class="col-md-3 col-md-offset-3">
+				<form class="form-horizontal">
+					<input type="text" id="place-input" value="合肥" class="form-control" placeholder="请输入地址">
+					 <button type="button" id="search-btn" class="btn btn-primary">查询</button>
+				</form>
+			</div>
+			<div class="col-md-6">
+				<div id="main" style="height: 500px"></div>
+			</div>
+		</div>
+	</div>
+
+	<script src="../jquery.js"></script>
+	<script src="../echarts.min.js"></script>
+	<script src="../anhui.js"></script>
+	<script src="../shine.js"></script>
+	<script>
+		var token = 'AFm1ee7tddLocwitgQWSfZ7Z55mmDQdH';
+		var url = 'http://api.map.baidu.com/geocoder/v2/?output=json&ak=' + token + '&address=';
+		var placeInput = $('#place-input');
+		var searchBtn = $('#search-btn')
+		var myChart = echarts.init(document.getElementById('main'),'shine')
+		var chartData = [];
+
+		searchBtn.on('click',function(){
+			var place = placeInput.val();
+			if(place){
+				$.getJSON(url+place+'&callback=?',function(res){
+					if(res.status===0){
+						// console.log(place,res.result)
+						
+						var location= res.result.location;
+						chartData.push({
+							name:name,
+							value:[location.lng,location.lat]
+						})
+						drawMap(place)
+					}else{
+						alert('百度地图没有找到地址')
+					}
+				})
+			}
+		})
+
+		function drawMap(place){
+			var option={
+				background:'#404a59',
+				title:{
+					text:'我的足迹',
+					left:'center',
+					textStyle:{
+						color:'orange',
+						fontFamily:'cursive'
+					},
+					padding:10
+				},
+				tooltip:{
+					trigger:'item'
+				},
+				toolbox:{
+					feature:{
+						saveAsImage:{
+							show:true
+						}
+					}
+				},
+				geo:{
+					map:'安徽',
+					label:{
+						emphasis:{
+							show:false
+						}
+					},
+					roam:true,
+					itemStyle:{
+						normal:{
+							areaColor:'#323c48',
+							borderColor:'#111'	
+						},
+						emphasis:{
+							areaColor:'#2a333d'
+							}
+						}
+					},
+					series:[{
+						name:'地址',
+						type:'scatter',
+						coordinateSystem:'geo',
+						data:chartData,
+						symbolSize:function(val){
+							return 10;
+						}
+					}]
+				
+			}
+			myChart.setOption(option)
+		}
+	</script>
+</body>
+</html>

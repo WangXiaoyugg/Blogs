@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue js 2.8</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container" id="app">
+            <div class="row">
+                 <div class="col-md-8 col-md-offset-2">
+                     <div class="panel panel-default">
+                         <div class="panel-heading">Welcome Vue.js 2.0 Tutorial</div>
+                          <div class="panel-body">
+                              <h1>{{message}}</h1>
+                              <ul class="list-group">
+                                  <li class="list-group-item" v-for="(todo,index) in todos">{{todo.title}}
+                                      <button class="btn btn-danger btn-xs pull-right" v-on:click="deleteTodo(index)">Delete</button>
+                                  </li>
+
+                              </ul>
+                              <form v-on:submit.prevent="addTodo(newTodo)">
+                                  <div class="form-group">
+                                      <input type="text" class="form-control" placeholder="add new todo" v-model="newTodo.title">
+                                  </div>
+                                  <div class="form-group">
+                                      <button class="btn btn-primary" type="submit">Add to do</button>
+                                       
+                                  </div>
+                              </form>
+                          </div>
+                     </div>
+                 </div>
+            </div>
+        </div>
+    </nav>
+
+    <script src="js/vue.js"> </script>
+    <script>
+     new Vue({
+         el:"#app",
+         data:{
+             message:'HELLO WORLD!',
+             todos:[
+                 {id:1,title:'learn vue.js now'}
+             ],
+             newTodo: {id:null,title:''}
+         },
+         methods:{
+             addTodo(newTodo){
+                 this.todos.push(newTodo);
+                 this.newTodo = {id:null,title:''};
+             },
+             deleteTodo(index){
+                 this.todos.splice(index,1);
+             }
+         }
+     })
+    </script>
+</body>
+</html>
